@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.MemberDAO;
 import model.entity.StudentAttendance;
-import model.repository.StudentAttendanceRepository;
 
 @WebServlet("/attendance/list")
 public class StudentAttendanceController extends HttpServlet {
@@ -53,4 +52,4 @@ public class StudentAttendanceController extends HttpServlet {
 		} 
 		
 	}
-	}
+}

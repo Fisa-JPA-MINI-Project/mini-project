@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>404 - 페이지를 찾을 수 없어요!</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Jua', 'Noto Sans KR', sans-serif;
+      overflow: hidden;
+    }
+    .error-container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 32px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+      padding: 48px 36px 36px 36px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      animation: animate__fadeInDown 1.2s;
+    }
+    .cute-face {
+      font-size: 4em;
+      margin-bottom: 12px;
+      animation: animate__tada 1.5s;
+      filter: drop-shadow(0 2px 8px #fbc2eb88);
+    }
+    .error-title {
+      color: #e17055;
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 8px #fbc2eb33;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    .error-desc {
+      color: #636e72;
+      font-size: 1.1em;
+      margin-bottom: 24px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .home-btn {
+      background: linear-gradient(90deg, #a1c4fd 0%, #c2e9fb 100%);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 36px;
+      font-size: 1.1em;
+      font-family: 'Jua', 'Noto Sans KR', sans-serif;
+      font-weight: bold;
+      box-shadow: 0 2px 8px #a6c1ee55;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .home-btn:hover, .home-btn:focus {
+      background: linear-gradient(90deg, #fbc2eb 0%, #a6c1ee 100%);
+      transform: translateY(-2px) scale(1.04);
+      outline: none;
+    }
+    .cloud {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 60px;
+      background: #fbc2eb;
+      border-radius: 60px 60px 40px 40px;
+      box-shadow: 0 8px 32px #fbc2eb33;
+      z-index: 0;
+      opacity: 0.7;
+      animation: floatCloud 3s ease-in-out infinite alternate;
+    }
+    @keyframes floatCloud {
+      0% { top: -40px; }
+      100% { top: -55px; }
+    }
+    .star {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: #fffbe7;
+      border-radius: 50%;
+      opacity: 0.7;
+      box-shadow: 0 0 8px #fffbe7, 0 0 16px #fbc2eb;
+      animation: twinkle 2s infinite alternate;
+    }
+    .star.s1 { top: 20px; left: 30px; animation-delay: 0.2s;}
+    .star.s2 { top: 60px; right: 40px; animation-delay: 0.7s;}
+    .star.s3 { bottom: 30px; left: 60px; animation-delay: 1.1s;}
+    .star.s4 { bottom: 50px; right: 80px; animation-delay: 0.5s;}
+    @keyframes twinkle {
+      0% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+    @media (max-width: 400px) {
+      .error-container {
+        min-width: 90vw;
+        padding: 24px 8px 20px 8px;
+      }
+      .error-title {
+        font-size: 1.2em;
+      }
+      .cute-face {
+        font-size: 2.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container animate__animated animate__fadeInDown">
+    <div class="cloud"></div>
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+    <div class="cute-face animate__animated animate__tada">(｡•́︿•̀｡)</div>
+    <div class="error-title">404 - 페이지를 찾을 수 없어요!</div>
+    <div class="error-desc">
+      찾으시는 페이지가 존재하지 않아요.<br>
+      혹시 주소를 잘못 입력하셨나요?<br>
+      귀여운 구름과 함께<br>
+      <span style="color:#e17055; font-weight:bold;">홈으로 돌아가볼까요?</span>
+    </div>
+    <button class="home-btn" onclick="location.href='/'">홈으로 돌아가기</button>
+  </div>
+</body>
+</html>

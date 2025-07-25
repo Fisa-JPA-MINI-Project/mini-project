@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,12 +23,16 @@ public class UserController extends HttpServlet {
 	static final MemberDAO memberDAO = MemberDAO.getModel();
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 
+	    HttpSession session = request.getSession();
 	    request.setCharacterEncoding("UTF-8");
 
 	    String name = request.getParameter("username");
+	    if(name == null) {
+	    	name = (String) session.getAttribute("userName");
+	    }
 	    StudentAttendance sa = null; // 여기서 초기화
 
 	    try {
@@ -35,17 +40,22 @@ public class UserController extends HttpServlet {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-
-	    if (sa == null) {
+	    if (sa == null && session.getAttribute("userId") == null) {
 	        request.setAttribute("name", name);
 	        request.getRequestDispatcher("/WEB-INF/views/loginfail.jsp").forward(request, response);
 	        return;
 	    }
-
-	    HttpSession session = request.getSession();
-	    session.setAttribute("username", sa.getName());
-	    session.setAttribute("userid", sa.getId());
-
+	    if (sa.getCheckIn() != null && sa.getCheckIn().getDayOfMonth() == LocalDateTime.now().getDayOfMonth()) {
+	    	request.setAttribute("checkintime", sa.getCheckIn());
+	    	request.setAttribute("checkouttime", sa.getCheckOut());
+	    }else {
+	      	session.setAttribute("checkintime", null);
+	    	session.setAttribute("checkouttime", null);
+	    }
+	    if(session.getAttribute("userId")== null) {
+	    session.setAttribute("userId", sa.getEmpno()); 
+	    session.setAttribute("userName", sa.getName()); 
+	    }
 	    request.getRequestDispatcher("/WEB-INF/views/usercheckin.jsp").forward(request, response); 
 	}
 

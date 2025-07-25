@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>오른쪽 슬라이드 탭 메뉴</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    height: 100vh;
+    position: relative;
+}
+
+.open-button {
+    width: 86px;
+    position: fixed;
+    top: 5%;
+    right: 0;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: white;
+    border: none;
+    border-radius: 10px 0 0 10px;
+    padding: 12px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    z-index: 1000;
+}
+
+.tab-container {
+    position: fixed;
+    top: 0;
+    right:-240px;
+    width: 220px;
+    height: 100%;
+    background: white;
+    box-shadow: -2px 0 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 10px;
+    gap: 10px;
+    transition: right 0.3s ease;
+    z-index: 999;
+}
+
+.tab-container.active {
+    right: 0; /* 나오는 상태 */
+}
+
+.tab-button {
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 18px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.tab-button:hover {
+    background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+}
+
+.close-button {
+    background: #ccc;
+    color: #333;
+}
+
+.close-button:hover {
+    background: #bbb;
+}
+</style>
+</head>
+<body>
+
+<button class="open-button" id="openButton">☰ 메뉴</button>
+
+<div class="tab-container" id="tabContainer">
+    <button class="tab-button" onclick="location.href='userinfo'">🏠 출근 / 퇴근</button>
+    <button class="tab-button" onclick="location.href='Attendance'">📅 내 출근 기록</button>
+    <button class="tab-button" onclick="location.href='Best'">👑 오늘의 출근왕</button>
+    <button class="tab-button close-button" id="closeButton">닫기 ✖️</button>
+</div>
+
+<script>
+const openButton = document.getElementById('openButton');
+const closeButton = document.getElementById('closeButton');
+const tabContainer = document.getElementById('tabContainer');
+
+openButton.addEventListener('click', () => {
+    tabContainer.classList.add('active');
+    openButton.style.display = 'none';
+});
+
+closeButton.addEventListener('click', () => {
+    tabContainer.classList.remove('active');
+    openButton.style.display = 'block';
+});
+</script>
+
+</body>
+</html>

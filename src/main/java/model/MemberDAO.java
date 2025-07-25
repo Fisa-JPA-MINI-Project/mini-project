@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,6 +97,67 @@ public class MemberDAO {
 	    em.close();
 	    return dateList;
 	}
+
+
+	public void getCheckIn(Long memberId, String name) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    try {
+	        em.getTransaction().begin();
+
+	        StudentAttendance sa = StudentAttendance.builder()
+        					.name(name)
+        					.trainDate(LocalDate.now())
+							.checkIn(LocalDateTime.now())
+							.empno(memberId)
+							.build();
+        				
+
+	        em.persist(sa);
+
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	}
+	
+	public void getCheckOut(Long userId, String userName) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    try {
+	        em.getTransaction().begin();
+
+	        // 오늘자 해당 유저의 가장 최근 출근 기록 조회
+	        StudentAttendance sa = em.createQuery(
+	                "SELECT s FROM StudentAttendance s WHERE s.empno = :empno AND s.trainDate = :today ORDER BY s.checkIn DESC",
+	                StudentAttendance.class)
+	            .setParameter("empno", userId)
+	            .setParameter("today", LocalDate.now())
+	            .setMaxResults(1)
+	            .getSingleResult();
+
+	        // 퇴근 시간만 현재 시각으로 업데이트
+	        sa.setCheckOut(LocalDateTime.now());
+
+	        em.getTransaction().commit();
+	    } catch (Exception e) {
+	        if (em.getTransaction().isActive()) {
+	            em.getTransaction().rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        em.close();
+	    }
+	}
+
+	
+	
+	
+	
+	
 
 
 }

@@ -5,34 +5,33 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.MemberDAO;
+
 import java.io.IOException;
 
-@WebServlet("/checkIn")
+@WebServlet("/checkin")
 public class CheckInController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CheckInController() {
-        super();
-        // TODO Auto-generated constructor stub
+    static final MemberDAO memberDAO = MemberDAO.getModel();
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        if(session == null) {
+            resp.sendRedirect("404.html");
+            return;
+        }
+        Long id = (Long) session.getAttribute("userId");
+        String name = (String) session.getAttribute("userName");
+
+        if(id == null || name == null){
+            resp.sendRedirect("view/404.html");
+            return;
+        }
+
+        memberDAO.getCheckIn(id, name);
+
+        // 출근 처리 후 userinfo GET으로 리다이렉트
+        resp.sendRedirect("userinfo");
     }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
-
 }

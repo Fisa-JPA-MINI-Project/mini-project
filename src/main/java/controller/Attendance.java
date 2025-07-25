@@ -27,22 +27,22 @@ public class Attendance extends HttpServlet {
 		String name = null;
 		Long id = null;
 
-//		if (session != null) {
-//		    name = (String) session.getAttribute("username"); // ✔️ 변수 선언 없이 대입만 함
-//		    id = (Long) session.getAttribute("userid");
-//
-//		    if (name != null && id != null) {
-//		        // name, id 정상적으로 사용 가능
-//		    } else {
-//		        //response.sendRedirect("login.jsp");
-//		    	System.out.println("answ-");
-//		        return;
-//		    }
-//		} else {
-//		    //response.sendRedirect("login.jsp");
-//			System.out.println("answp");
-//		    return;
-//		}
+		if (session != null) {
+		    name = (String) session.getAttribute("userName"); // ✔️ 변수 선언 없이 대입만 함
+		    id = (Long) session.getAttribute("userId");
+
+		    if (name != null && id != null) {
+		        // name, id 정상적으로 사용 가능
+		    } else {
+		        response.sendRedirect("userinfo");
+		    	System.out.println("answ-");
+		        return;
+		    }
+		} else {
+		    response.sendRedirect("userinfo");
+			System.out.println("answp");
+		    return;
+		}
 		
 		name="홍혜원";
 

@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,17 @@ public class MemberDAO {
         em.close();
 	    return list;
 	}
+	public List<StudentAttendance> getTodayAttendance() throws NullPointerException{
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = null;
+	    list = em.createQuery(
+	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :today",
+	            StudentAttendance.class)
+	        .setParameter("today", java.time.LocalDate.now())
+	        .getResultList();
+	    em.close();
+	    return list;
+	}
 
 	public StudentAttendance getStudent(String name) throws Exception{
 		EntityManager em = DBUtil.getEntityManager();
@@ -50,5 +62,28 @@ public class MemberDAO {
         em.close();
         return sa;
 	}
+	public StudentAttendance getEarliestAttendance(LocalDate date) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = em.createQuery(
+	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :date AND s.checkIn IS NOT NULL ORDER BY s.checkIn ASC",
+	            StudentAttendance.class)
+	        .setParameter("date", date)
+	        .setMaxResults(1)
+	        .getResultList();
+	    em.close();
+	    return list.isEmpty() ? null : list.get(0);
+	}
+	
+	public List<StudentAttendance> getAttendanceByDate(LocalDate date) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = em.createQuery(
+	        "SELECT s FROM StudentAttendance s WHERE s.trainDate = :date", 
+	        StudentAttendance.class)
+	        .setParameter("date", date)
+	        .getResultList();
+	    em.close();
+	    return list;
+	}
+
 
 }

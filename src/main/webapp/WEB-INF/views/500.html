@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>500 - 서버 오류</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f8fafc 0%, #e0e7ef 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Jua', 'Noto Sans KR', sans-serif;
+      overflow: hidden;
+    }
+    .error-container {
+      background: rgba(255,255,255,0.85);
+      border-radius: 32px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+      padding: 48px 36px 36px 36px;
+      min-width: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+      animation: animate__fadeInDown 1.2s;
+    }
+    .cute-face {
+      font-size: 4em;
+      margin-bottom: 12px;
+      animation: animate__tada 1.5s;
+      filter: drop-shadow(0 2px 8px #b3c6ff88);
+    }
+    .error-title {
+      color: #4f5bd5;
+      font-size: 2.2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 8px #b3c6ff33;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+    .error-desc {
+      color: #6b7280;
+      font-size: 1.1em;
+      margin-bottom: 24px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .home-btn {
+      background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+      color: #fff;
+      font-family: 'Jua', 'Noto Sans KR', sans-serif;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 32px;
+      padding: 12px 36px;
+      margin-top: 8px;
+      box-shadow: 0 2px 12px #a18cd133;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .home-btn:hover, .home-btn:focus {
+      background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
+      transform: translateY(-2px) scale(1.04);
+      outline: none;
+    }
+    .cloud {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 60px;
+      background: #e0e7ef;
+      border-radius: 60px 60px 40px 40px;
+      box-shadow: 0 8px 32px #b3c6ff33;
+      z-index: 0;
+      opacity: 0.7;
+      animation: floatCloud 3s ease-in-out infinite alternate;
+    }
+    @keyframes floatCloud {
+      0% { top: -40px; }
+      100% { top: -55px; }
+    }
+    @media (max-width: 400px) {
+      .error-container {
+        min-width: 90vw;
+        padding: 24px 8px 20px 8px;
+      }
+      .error-title {
+        font-size: 1.2em;
+      }
+      .cute-face {
+        font-size: 2.2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="error-container animate__animated animate__fadeInDown">
+    <div class="cloud"></div>
+    <div class="cute-face animate__animated animate__tada">(´•̥̥̥ω•̥̥̥`)</div>
+    <div class="error-title">500 - 서버에 문제가 생겼어요!</div>
+    <div class="error-desc">
+      서버가 잠시 아파요.<br>
+      잠시 후 다시 시도해 주세요.<br>
+      문제가 계속된다면 관리자에게 문의해 주세요.
+    </div>
+    <button class="home-btn" onclick="location.href='/WEB-INF/views/'">홈으로 돌아가기</button>
+  </div>
+</body>
+</html>

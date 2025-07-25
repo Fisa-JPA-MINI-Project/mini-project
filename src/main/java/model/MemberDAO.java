@@ -13,7 +13,6 @@ import util.DBUtil;
 public class MemberDAO {
 
 
-	private static EntityManager em = DBUtil.getEntityManager();
 	
 	private static MemberDAO model = new MemberDAO();
 	
@@ -25,15 +24,14 @@ public class MemberDAO {
 	
 	// 내 출석 시간 보기
 	public List<StudentAttendance> getMyAttendance() throws NullPointerException{
+		EntityManager em = DBUtil.getEntityManager();
 	    List<StudentAttendance> list = null;
-	        list = em.createQuery(
-	                "SELECT s FROM StudentAttendance s WHERE s.name = :name",
-	                StudentAttendance.class)
-	            .setParameter("name", "홍혜원")
-	            .getResultList();
-        if (em != null) {
-            em.close();
-        }
+        list = em.createQuery(
+                "SELECT s FROM StudentAttendance s WHERE s.name = :name",
+                StudentAttendance.class)
+            .setParameter("name", "홍혜원")
+            .getResultList();
+        em.close();
 	    return list;
 	}
 	public List<StudentAttendance> getTodayAttendance() throws NullPointerException{
@@ -48,19 +46,44 @@ public class MemberDAO {
 	    return list;
 	}
 
-	public StudentAttendance getStudent(Long id) {
-		return null;
-	}
+	public StudentAttendance getStudent(String name) throws Exception{
+		EntityManager em = DBUtil.getEntityManager();
+		StudentAttendance sa = null;
+        List<StudentAttendance> list = em.createQuery(
+                "SELECT s FROM StudentAttendance s WHERE s.name = :name order by checkin desc",
+                StudentAttendance.class)
+            .setParameter("name", name)
+            .setMaxResults(1)
+            .getResultList();
 
+        if (!list.isEmpty()) {
+            sa = list.get(0);
+        }
+        em.close();
+        return sa;
+	}
+	public StudentAttendance getEarliestAttendance(LocalDate date) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = em.createQuery(
+	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :date AND s.checkIn IS NOT NULL ORDER BY s.checkIn ASC",
+	            StudentAttendance.class)
+	        .setParameter("date", date)
+	        .setMaxResults(1)
+	        .getResultList();
+	    em.close();
+	    return list.isEmpty() ? null : list.get(0);
+	}
+	
 	public List<StudentAttendance> getAttendanceByDate(LocalDate date) {
 	    EntityManager em = DBUtil.getEntityManager();
-	    List<StudentAttendance> list = null;
-	    list = em.createQuery(
-	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :targetDate",
-	            StudentAttendance.class)
-	        .setParameter("targetDate", date)
+	    List<StudentAttendance> list = em.createQuery(
+	        "SELECT s FROM StudentAttendance s WHERE s.trainDate = :date", 
+	        StudentAttendance.class)
+	        .setParameter("date", date)
 	        .getResultList();
 	    em.close();
 	    return list;
 	}
+
+
 }

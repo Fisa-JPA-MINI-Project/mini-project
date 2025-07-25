@@ -11,7 +11,7 @@ String checkInTime = best.getCheckIn() != null
 <!DOCTYPE html>
 <html>
 <head>
-<title><%=selectedDate%> 최조 출석자 - WOORI ATTENDANCE</title>
+<title><%=selectedDate%> 최초 출석자 - WOORI ATTENDANCE</title>
 <style>
 body {
 	font-family: 'Noto Sans KR', '맑은 고딕', Arial, sans-serif;
@@ -121,7 +121,7 @@ th {
 			</tr>
 			<tr>
 				<th>시간</th>
-				<td style="color: #218dfc;"><%= checkInTime %></td>
+				<td style="color: #218dfc;"><%=checkInTime%></td>
 			</tr>
 		</table>
 		<a class="Best" href="Best">다른 날짜 조회</a>

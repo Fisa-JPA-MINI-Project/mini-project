@@ -41,8 +41,6 @@ h2 {
 select, button {
 	font-size: 1.1em;
 	padding: 8px 16px;
-	margin: 0 0 30px 0;
-	width: 80%;
 	border-radius: 9px;
 	border: 1.3px solid #d9e8fc;
 	transition: border 0.35s;
@@ -72,9 +70,15 @@ select:focus {
 .woori-btn:hover {
 	background: linear-gradient(90deg, #2174d1 10%, #00b4de 90%);
 }
+
+.select-box{
+width: 80%;
+	margin: 0 0 30px 0;
+}
 </style>
 </head>
 <body>
+	<jsp:include page="../WebContent/righttab.html" />
 	<div class="container">
 		<div class="woori-logo">
 			<span style="vertical-align: middle;">우리</span> <span
@@ -83,7 +87,7 @@ select:focus {
 		<h2>출석 조회 날짜 선택</h2>
 		<form action="Best" method="get">
 
-			<select name="date" required>
+			<select name="date" class="select-box" required>
 				<option value="" disabled selected>날짜를 선택하세요</option>
 				<c:forEach var="d" items="${dateList}">
 					<option value="${d}">${d}</option>

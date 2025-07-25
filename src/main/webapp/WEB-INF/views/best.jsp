@@ -12,7 +12,7 @@ String checkInTime = best.getCheckIn() != null
 <html>
 <head>
 
-<title><%=selectedDate%> 최 출석자 - WOORI ATTENDANCE</title>
+<title><%=selectedDate%> 최초 출석자 - WOORI ATTENDANCE</title>
 
 <style>
 body {
@@ -102,13 +102,14 @@ th {
 </style>
 </head>
 <body>
+	<jsp:include page="../WebContent/righttab.html" />
 	<div class="wrapper">
 		<div class="woori-logo">
 			<span style="vertical-align: middle;">우리</span> <span
 				style="vertical-align: middle;">FISA</span>
 		</div>
 
-		<div class="date"><%= selectedDate %></div>
+		<div class="date"><%=selectedDate%></div>
 		<div class="best-icon">🌅</div>
 		<div class="desc">
 			이 날 가장 먼저 출석한 <br> ❗출근왕❗
@@ -117,15 +118,15 @@ th {
 			<tr>
 				<th>이름</th>
 
-				<td><%= best.getName() %></td>
+				<td><%=best.getName()%></td>
 			</tr>
 			<tr>
 				<th>번호</th>
-				<td><%= best.getEmpno() %></td>
+				<td><%=best.getEmpno()%></td>
 			</tr>
 			<tr>
 				<th>시간</th>
-				<td style="color: #218dfc;"><%= checkInTime %></td>
+				<td style="color: #218dfc;"><%=checkInTime%></td>
 			</tr>
 		</table>
 		<a class="Best" href="Best">다른 날짜 조회</a>

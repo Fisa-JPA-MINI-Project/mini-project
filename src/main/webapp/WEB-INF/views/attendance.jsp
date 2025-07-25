@@ -1,46 +1,50 @@
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page import="java.util.List"%>
 <html>
 <head>
-    <title>출석 시간 그래프</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Noto Sans KR', '맑은 고딕', Arial, sans-serif;
-            background: linear-gradient(135deg, #355b96 0%, #00b4de 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 4px 24px 0 rgba(48,78,125,0.14);
-            width: 480px;
-            margin: 70px auto 0;
-            padding: 38px 30px 32px 30px;
-            text-align: center;
-        }
-        h2 {
-            color: #184777;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-        #attendanceChart {
-            background: #f5f9fe;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(48,78,125,0.09);
-            padding: 12px;
-        }
-    </style>
+<title>출석 시간 그래프</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body {
+	font-family: 'Noto Sans KR', '맑은 고딕', Arial, sans-serif;
+	background: linear-gradient(135deg, #355b96 0%, #00b4de 100%);
+	min-height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 4px 24px 0 rgba(48, 78, 125, 0.14);
+	width: 480px;
+	margin: 70px auto 0;
+	padding: 38px 30px 32px 30px;
+	text-align: center;
+}
+
+h2 {
+	color: #184777;
+	margin-bottom: 25px;
+	font-weight: 700;
+}
+
+#attendanceChart {
+	background: #f5f9fe;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(48, 78, 125, 0.09);
+	padding: 12px;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h2>출석 시간 그래프</h2>
-        <canvas id="attendanceChart" width="400" height="300"></canvas>
-        <%-- JSP에서 배열을 안전하게 JS로 넘기기 --%>
-        <%
+	<jsp:include page="../WebContent/righttab.html" />
+	<div class="container">
+		<h2>출석 시간 그래프</h2>
+		<canvas id="attendanceChart" width="400" height="300"></canvas>
+		<%-- JSP에서 배열을 안전하게 JS로 넘기기 --%>
+		<%
             List<String> dateList = (List<String>) request.getAttribute("dateList");
             List<Double> hourList = (List<Double>) request.getAttribute("hourList");
             StringBuilder labelStr = new StringBuilder("[");
@@ -60,7 +64,7 @@
             }
             dataStr.append("]");
         %>
-        <script>
+		<script>
         function hourToTimeLabel(value) {
             if (value == null || isNaN(value)) return '';
             const hour = Math.floor(value);
@@ -143,6 +147,6 @@
             }
         });
         </script>
-    </div>
+	</div>
 </body>
 </html>

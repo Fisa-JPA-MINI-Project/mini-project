@@ -49,8 +49,8 @@ public class StudentAttendanceController extends HttpServlet {
 
 			request.getRequestDispatcher("/WEB-INF/views/attendance.jsp").forward(request, response);
 		}catch(NullPointerException e) {
-			
+			response.sendRedirect("/WEB-INF/views/500.html");
 		} 
-
+		
 	}
 	}

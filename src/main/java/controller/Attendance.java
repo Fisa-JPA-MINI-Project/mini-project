@@ -12,9 +12,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.MemberDAO;
 import model.entity.StudentAttendance;
 
-/**
- * Servlet implementation class Attendance
- */
 @WebServlet("/Attendance")
 public class Attendance extends HttpServlet {
 

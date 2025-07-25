@@ -84,6 +84,15 @@ public class MemberDAO {
 	    em.close();
 	    return list;
 	}
+	
+	public List<LocalDate> getAttendanceDates() {
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<LocalDate> dateList = em.createQuery(
+	        "SELECT DISTINCT s.trainDate FROM StudentAttendance s ORDER BY s.trainDate ASC", LocalDate.class)
+	        .getResultList();
+	    em.close();
+	    return dateList;
+	}
 
 
 }

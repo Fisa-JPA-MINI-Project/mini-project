@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,8 +36,31 @@ public class MemberDAO {
         }
 	    return list;
 	}
+	public List<StudentAttendance> getTodayAttendance() throws NullPointerException{
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = null;
+	    list = em.createQuery(
+	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :today",
+	            StudentAttendance.class)
+	        .setParameter("today", java.time.LocalDate.now())
+	        .getResultList();
+	    em.close();
+	    return list;
+	}
 
 	public StudentAttendance getStudent(Long id) {
 		return null;
+	}
+
+	public List<StudentAttendance> getAttendanceByDate(LocalDate date) {
+	    EntityManager em = DBUtil.getEntityManager();
+	    List<StudentAttendance> list = null;
+	    list = em.createQuery(
+	            "SELECT s FROM StudentAttendance s WHERE s.trainDate = :targetDate",
+	            StudentAttendance.class)
+	        .setParameter("targetDate", date)
+	        .getResultList();
+	    em.close();
+	    return list;
 	}
 }

@@ -31,7 +31,7 @@ public class UserController extends HttpServlet {
 	    StudentAttendance sa = null; // 여기서 초기화
 
 	    try {
-	        StudentAttendance sa = memberDAO.getStudent(name);
+	         sa = memberDAO.getStudent(name);
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }

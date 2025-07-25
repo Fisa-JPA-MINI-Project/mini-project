@@ -23,15 +23,18 @@ public class MemberDAO {
 	}
 	
 	// 내 출석 시간 보기
-	public List<StudentAttendance> getMyAttendance() throws NullPointerException{
+	public List<StudentAttendance> getMyAttendance(String name) throws NullPointerException{
 		EntityManager em = DBUtil.getEntityManager();
-	    List<StudentAttendance> list = null;
-        list = em.createQuery(
-                "SELECT s FROM StudentAttendance s WHERE s.name = :name",
-                StudentAttendance.class)
-            .setParameter("name", "홍혜원")
-            .getResultList();
-        em.close();
+		List<StudentAttendance> list = null;
+	        list = em.createQuery(
+	                "SELECT s FROM StudentAttendance s WHERE s.name = :name order by traindate asc",
+	                StudentAttendance.class)
+	            .setParameter("name", name)
+	            .getResultList();
+        if (em != null) {
+            em.close();
+            em=null;
+        }
 	    return list;
 	}
 	public List<StudentAttendance> getTodayAttendance() throws NullPointerException{

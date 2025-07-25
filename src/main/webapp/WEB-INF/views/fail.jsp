@@ -67,7 +67,7 @@ java.time.LocalDate selectedDate = (java.time.LocalDate) request.getAttribute("s
     <div class="fail-message" style="margin-bottom:30px;">
         <%= msg != null ? msg : "아직 출석한 사람이 없습니다." %>
     </div>
-    <a href="dateSelect.jsp" class="home-btn">날짜 다시 선택</a>
+    <a href="Best" class="home-btn">날짜 다시 선택</a>
 </div>
 </body>
 </html>

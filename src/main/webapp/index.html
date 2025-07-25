@@ -2,9 +2,78 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이름 입력</title>
+<style>
+body {
+  background: linear-gradient(135deg, #e0e7ef 0%, #3a7bd5 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.form-container {
+  background: #f7fbff;
+  padding: 2.5rem 2rem 2rem 2rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px 0 rgba(58, 123, 213, 0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 320px;
+}
+.form-container h2 {
+  margin-bottom: 1.5rem;
+  color: #2260a9;
+  font-weight: 700;
+}
+.input-group {
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+.input-group input {
+  width: calc(100% - 2rem);
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #b3c6e0;
+  border-radius: 0.7rem;
+  font-size: 1.1rem;
+  outline: none;
+  transition: border 0.2s;
+  background: #f0f6fc;
+  color: #2260a9;
+}
+.input-group input:focus {
+  border: 2px solid #3a7bd5;
+  background: #e6f0fa;
+}
+.submit-btn {
+  width: 100%;
+  padding: 0.9rem 0;
+  background: linear-gradient(90deg, #2260a9 0%, #3a7bd5 100%);
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px 0 rgba(58, 123, 213, 0.08);
+}
+.submit-btn:hover {
+  background: linear-gradient(90deg, #3a7bd5 0%, #2260a9 100%);
+}
+</style>
 </head>
 <body>
-Hello World!
+  <div class="form-container">
+    <img src="resources/images/우리은행_로고.png" alt="우리은행 로고" style="width:120px; margin-bottom: 1.2rem; display:block;">
+    <h2>이름을 입력하세요</h2>
+    <form action="userinfo" method="post" id="nameForm">
+      <div class="input-group">
+        <input type="text" name="username" id="username" placeholder="이름을 입력하세요" required autocomplete="off">
+      </div>
+      <button type="submit" class="submit-btn">전송</button>
+    </form>
+  </div>
 </body>
 </html>

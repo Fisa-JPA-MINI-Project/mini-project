@@ -13,34 +13,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.MemberDAO;
 import model.entity.StudentAttendance;
+import model.repository.StudentAttendanceRepository;
 
-/**
- * Servlet implementation class Attendance
- */
-@WebServlet("/Attendance")
-public class Attendance extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	private EntityManagerFactory emf;
-
-	@Override
-	public void init() throws ServletException {
-		emf = Persistence.createEntityManagerFactory("dbinfo"); // persistence.xml 이름
-	}
+@WebServlet("/attendance/list")
+public class StudentAttendanceController extends HttpServlet {
+	static final MemberDAO memberDAO = MemberDAO.getModel();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		EntityManager em = null;
 		try {
-			em = emf.createEntityManager();
-
-			// "홍혜원"의 출석 데이터 조회
-			List<StudentAttendance> list = em
-					.createQuery("SELECT s FROM StudentAttendance s WHERE s.name = :name", StudentAttendance.class)
-					.setParameter("name", "홍혜원").getResultList();
+			List<StudentAttendance> list = memberDAO.getMyAttendance();
 			List<String> dateList = new ArrayList<>();
 			List<Integer> hourList = new ArrayList<>();
 
@@ -57,20 +43,14 @@ public class Attendance extends HttpServlet {
 					hourList.add(0); // 또는 continue;
 				}
 			}
-
+			
 			request.setAttribute("dateList", dateList);
 			request.setAttribute("hourList", hourList);
 
 			request.getRequestDispatcher("/WEB-INF/views/attendance.jsp").forward(request, response);
 		} finally {
-			if (em != null)
-				em.close();
+			
 		}
-	}
 
-	@Override
-	public void destroy() {
-		if (emf != null)
-			emf.close();
 	}
-}
+	}

@@ -2,16 +2,16 @@
 <%@ page import="model.entity.StudentAttendance"%>
 <%@ page import="java.time.format.DateTimeFormatter"%>
 <%
-    StudentAttendance best = (StudentAttendance) request.getAttribute("best");
-    java.time.LocalDate selectedDate = (java.time.LocalDate) request.getAttribute("selectedDate");
-    String checkInTime = best.getCheckIn() != null
-        ? best.getCheckIn().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
-        : "-";
+StudentAttendance best = (StudentAttendance) request.getAttribute("best");
+java.time.LocalDate selectedDate = (java.time.LocalDate) request.getAttribute("selectedDate");
+String checkInTime = best.getCheckIn() != null
+		? best.getCheckIn().toLocalTime().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+		: "-";
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<title><%= selectedDate %> 최조 출석자 - WOORI ATTENDANCE</title>
+<title><%=selectedDate%> 최조 출석자 - WOORI ATTENDANCE</title>
 <style>
 body {
 	font-family: 'Noto Sans KR', '맑은 고딕', Arial, sans-serif;
@@ -105,7 +105,7 @@ th {
 			<span style="vertical-align: middle;">우리</span> <span
 				style="vertical-align: middle;">FISA</span>
 		</div>
-		<div class="date"><%= selectedDate %></div>
+		<div class="date"><%=selectedDate%></div>
 		<div class="best-icon">🌅</div>
 		<div class="desc">
 			이 날 가장 먼저 출석한 <br> ❗출근왕❗
@@ -113,11 +113,11 @@ th {
 		<table>
 			<tr>
 				<th>이름</th>
-				<td><%= best.getName() %></td>
+				<td><%=best.getName()%></td>
 			</tr>
 			<tr>
 				<th>번호</th>
-				<td><%= best.getEmpno() %></td>
+				<td><%=best.getEmpno()%></td>
 			</tr>
 			<tr>
 				<th>시간</th>

@@ -23,19 +23,16 @@ public class MemberDAO {
 	}
 	
 	// 내 출석 시간 보기
-	public List<StudentAttendance> getMyAttendance() {
+	public List<StudentAttendance> getMyAttendance() throws NullPointerException{
 	    List<StudentAttendance> list = null;
-	    try {
 	        list = em.createQuery(
 	                "SELECT s FROM StudentAttendance s WHERE s.name = :name",
 	                StudentAttendance.class)
 	            .setParameter("name", "홍혜원")
 	            .getResultList();
-	    } finally {
-	        if (em != null) {
-	            em.close();
-	        }
-	    }
+        if (em != null) {
+            em.close();
+        }
 	    return list;
 	}
 

@@ -48,9 +48,9 @@ public class StudentAttendanceController extends HttpServlet {
 			request.setAttribute("hourList", hourList);
 
 			request.getRequestDispatcher("/WEB-INF/views/attendance.jsp").forward(request, response);
-		} finally {
+		}catch(NullPointerException e) {
 			
-		}
+		} 
 
 	}
 	}

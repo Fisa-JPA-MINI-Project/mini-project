@@ -48,7 +48,7 @@ Oracle 데이터베이스와 연동하여 출석 데이터를 저장 및 조회�
 
 ## 🛠️ 사용 기술
 
-<p align="center"> <img src="https://img.shields.io/badge/Java-17-007396?logo=OpenJDK&logoColor=white&style=for-the-badge" alt="Java 17"/> <img src="https://img.shields.io/badge/Jakarta%20Servlet-Tomcat-2496ED?logo=apachetomcat&logoColor=white&style=for-the-badge" alt="Servlet Tomcat"/> <img src="https://img.shields.io/badge/JSP-%23007396?logo=java&logoColor=white&style=for-the-badge" alt="JSP"/> <img src="https://img.shields.io/badge/JPA-Hibernate-59666C?logo=hibernate&logoColor=white&style=for-the-badge" alt="JPA Hibernate"/> <img src="https://img.shields.io/badge/Oracle-Database-F80000?logo=oracle&logoColor=white&style=for-the-badge" alt="Oracle DB로 표시하기
+<p align="center"> <img src="https://img.shields.io/badge/Java-17-007396?logo=OpenJDK&logoColor=white&style=for-t로 표시하기
 
 * `DateTimeFormatter.ofPattern("HH:mm")` 사용하여 `01:01` 형식으로 간결하게 표시
 * UI 개선:
